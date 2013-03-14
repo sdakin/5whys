@@ -1,0 +1,85 @@
+<html>
+<head>
+	<title>5 Whys</title>
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+	<!--script src="lib/bootstrap/js/bootstrap.min.js"></script-->
+	<style>
+	input {
+		height: 30px;
+	}
+	</style>
+</head>
+<body>
+	<div style="padding-top:50px">
+		<div style="width:600px;margin:auto">
+			<div class="well">
+				Welcome to the 5 Whys web site where you can find deeper meaning to the questions you're curious about.<br/><br/>
+				<div id="processDetail">
+					The 5 Whys process was developed by Toyota as a problem-solving technique, but it can also be used as a general process for inquisitive people to examine their views on various topics.<br/><br/>
+				</div>
+				You can read more about <a href="http://en.wikipedia.org/wiki/5_Whys" target="_blank">the 5 Whys process on Wikipedia.</a>
+			</div>
+			<div id="askWhy" style="display:none">
+				<form class="form-horizontal">
+					<div class="control-group">
+						<label class="control-label" for="inWhy">Enter your why question</label>
+						<div class="controls">
+							<input type="text" id="inWhy" placeholder="why" style="width:400px;height:30px">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div style="text-align:center">
+				<button id="btnCTA" class="btn btn-large btn-success" type="button">Ask Why</button>
+			</div>
+		</div>
+	</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="lib/jquery.textchange.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	var stepNum = 1;
+	var $cta = $("#btnCTA");
+	$cta.click(nextStep);
+	$("#inWhy").bind('textchange', function (event, previousText) { whyChanged() });
+
+
+	function nextStep() {
+		switch (stepNum) {
+			case 1:
+				$("#processDetail").slideUp();
+				$("#askWhy").slideDown(400, function() {
+					$("#inWhy").focus();
+				});
+				$cta.text("Continue");
+				$cta.addClass("disabled");
+				stepNum++;
+				break;
+			case 2:
+				if (!$cta.hasClass("disabled")) {
+					console.log("starting step 2")
+					$("#askWhy").slideUp();
+					stepNum++;
+				}
+				break;
+			case 3:
+				console.log("starting step 3")
+				$("#btnCTA").text("Finish");
+				stepNum++;
+				break;
+			case 4:
+				window.location = "home.html";
+				break;
+		}
+	}
+
+	function whyChanged() {
+		if ($("#inWhy").val().length > 0)
+			$cta.removeClass("disabled");
+		else
+			$cta.addClass("disabled");
+	}
+})
+</script>
+</body>
+</html>

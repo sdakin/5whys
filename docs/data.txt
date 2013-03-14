@@ -1,0 +1,19 @@
+Data needed for the 5 Whys app:
+
+User Info
+
+* visitor ID (stored in a cookie)
+* username (optional, but highly recommended)
+* email address (optional, useful for notifications and resetting forgotten password)
+* password (optional, only needed if user wants to safeguard Why question and responses)
+
+Question Info
+
+* question ID (one per question/asker/askee)
+* asker (username or visitor ID of the person asking a question)
+* askee (username or visitor ID of the person answering a question)
+* question number (1 through 5)
+* question
+* response
+* future: comments (any number, tagged by asker/askee and ordered by date/time)
+
